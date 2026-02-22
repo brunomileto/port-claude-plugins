@@ -1,0 +1,53 @@
+# ────────────────────────────────────────────────────────────────
+# port_claude_plugin configuration
+#
+# Every value below is also a built-in default inside the code.
+# Edit this file to change behaviour without touching source.
+# CLI flags always override values here.
+# ────────────────────────────────────────────────────────────────
+
+[port_claude_plugin]
+prog_name = "port_claude_plugin"
+search_root = "~/dev/claude-plugins"
+max_depth = 6
+default_mode = "copy"                # "copy" or "link"
+target_dir = ".opencode"
+
+[port_claude_plugin.markers]
+# A directory is considered a "probable plugin" if it contains
+# at least one of these children.
+names = ["skills", "commands", "agents", ".mcp.json"]
+
+# ── Component mappings ─────────────────────────────────────────
+# Each [[port_claude_plugin.components]] block defines one artefact to
+# transfer from the plugin into the project.
+#
+# Fields:
+#   name  — human label shown in the plan table
+#   src   — path relative to the plugin directory
+#   dst   — path relative to target_dir; {plugin_name} is replaced
+#   kind  — "dir" or "file"
+
+[[port_claude_plugin.components]]
+name = "skills"
+src = "skills"
+dst = "skills/{plugin_name}"
+kind = "dir"
+
+[[port_claude_plugin.components]]
+name = "commands"
+src = "commands"
+dst = "commands/{plugin_name}"
+kind = "dir"
+
+[[port_claude_plugin.components]]
+name = "agents"
+src = "agents"
+dst = "agents/{plugin_name}"
+kind = "dir"
+
+[[port_claude_plugin.components]]
+name = "mcp"
+src = ".mcp.json"
+dst = "mcp/{plugin_name}.mcp.json"
+kind = "file"

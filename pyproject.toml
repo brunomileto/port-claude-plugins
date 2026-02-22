@@ -1,0 +1,13 @@
+[project]
+name = "port-claude-plugins"
+version = "0.2.0"
+description = "Port Claude Code plugins into OpenCode projects"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+rich = ["rich>=13.0"]
+
+[project.scripts]
+port_claude_plugin = "port_claude_plugin.cli:main"
